@@ -2,7 +2,10 @@
 " $VIM_PLUGINS_DIR    - path to directory containing vim plugin installations
 " $PYTHON3_HOST_PROG  - path to python3 executable
 
-let $HOME = $USERPROFILE
+" Setting $HOME seems to only be necessary for windows machines
+if (has('win32'))
+  let $HOME = $USERPROFILE
+endif
 
 " Note that plugins are loaded in the order they're specified
 call plug#begin(fnameescape($VIM_PLUGINS_DIR))
