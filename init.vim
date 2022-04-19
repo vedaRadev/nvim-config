@@ -1,52 +1,23 @@
 " The following environment variables need to be defined:
-" $VIM_PLUGINS_DIR    - path to directory containing vim plugin installations
 " $PYTHON3_HOST_PROG  - path to python3 executable
+"
+" TODO Rewrite config using lua neovim API
+" TODO Use packer instead of plugged
+" NOTE This will require neovim v0.50+
+
+let g:python3_host_prog = fnameescape($PYTHON3_HOST_PROG)
 
 " Setting $HOME seems to only be necessary for windows machines
 if (has('win32'))
   let $HOME = $USERPROFILE
 endif
 
-" Note that plugins are loaded in the order they're specified
-call plug#begin(fnameescape($VIM_PLUGINS_DIR))
-" Unused
-" Plug 'gcmt/wildfire.vim'
-" Plug 'prettier/vim-prettier', {'do': 'npm install'}
-" Plug 'yuttie/comfortable-motion.vim'
-" Plug 'othree/yajs.vim'
+exe 'source ' . expand('%:p:h') . '/init.plugins.lua'
 
-" Active
-Plug 'andrewradev/splitjoin.vim'
-" Plug 'ctrlpvim/ctrlp.vim'
-Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/vim-peekaboo'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'mbbill/undotree'
-Plug 'nathanaelkane/vim-indent-guides'
-
-if (has('nvim'))
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-endif
-
-Plug 'scrooloose/nerdtree'
-Plug 'sheerun/vim-polyglot'
-Plug 't9md/vim-choosewin'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'voldikss/vim-floaterm'
-Plug 'wesq3/vim-windowswap'
-
-Plug 'ayu-theme/ayu-vim'
-Plug 'kadekillary/Turtles'
-Plug 'srcery-colors/srcery-vim'
-Plug 'tyrannicaltoucan/vim-deep-space'
-call plug#end()
+" TODO move into init.plugins.lua if using
+"""""""""" GUTENTAGS
+"let g:gutentags_ctags_exclude=['node_modules']
+"set statusline+=%{gutentags#statusline()}
 
 syntax on
 set fileformats=unix,dos " remove this for DOS-style line endings
@@ -70,15 +41,12 @@ set smartindent
 set textwidth=120
 set wrap
 set termguicolors
-set bdir=$HOME/AppData/Local/nvim-data/backup
-set shell=cmd
-" set shell=wsl
+if (has('win32'))
+  set shell=cmd
+endif
 
-let ayucolor="dark"
+let ayucolor = "dark"
 color ayu
-" color turtles
-" color deep-space
-" Adding more contrasting colors so that stuff is more visible on screen
 hi normal guibg=black
 hi linenr guifg=slategrey
 hi cursorline guibg=#292929
@@ -90,6 +58,7 @@ command! Q q
 command! Qa qa
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+" TODO move plugin-specific mappings into init.plugins.vim
 let mapleader = ' '
 nnoremap <up> <nop>
 nnoremap <right> <nop>
@@ -117,8 +86,6 @@ nnoremap <leader>ofd :NERDTreeFind<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>esd :CocDiagnostics<cr>
 
-" nnoremap <leader>b :BlamerToggle<cr>
-" nnoremap <leader>p[ :CtrlPTag<cr> "super slow with large projects atm
 inoremap <Up> <nop>
 inoremap <Right> <nop>
 inoremap <Left>	<nop>
@@ -157,58 +124,6 @@ augroup MarkdownFiles
   au FileType markdown nnoremap <buffer> <leader>mdu- yyp<s-v>r-
   au FileType markdown nnoremap <buffer> <leader>mdu= yyp<s-v>r=
 augroup END
-
-"""""""""""""""""""" PLUGIN CONFIG
-let g:python3_host_prog = fnameescape($PYTHON3_HOST_PROG)
-
-"""""""""" AIRLINE
-let g:airline_powerline_fonts = 0 " enable pretty airline with powerline fonts
-let g:airline#extensions#branch#enabled = 1
-
-""" Airline themes
-" let g:airline_theme = 'durant'
-let g:airline_theme = 'turtles'
-
-let g:airline#extensions#tabline#enabled = 1 " automatically display all buffers when there's only one tab open
-let g:airline_section_b = '%{strftime("%H:%M")}'
-
-"""""""""" GUTENTAGS
-let g:gutentags_ctags_exclude=['node_modules']
-set statusline+=%{gutentags#statusline()}
-
-"""""""""" CHOOSEWIN
-let g:choosewin_overlay_enable = 1
-
-"""""""""" CTRLP
-let g:ctrlp_custom_ignore = 'node_modules'
-
-"""""""""" SYNTASTIC
-set statusline+=%#warningmsg#
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-"""""""""" NERDTREE
-let g:NERDTreeAutoCenter = 0
-
-"""""""""" VIM-PEEKABOO
-let g:peekaboo_window = 'vert bo 50new'
-let g:peekaboo_delay = 500
-
-"""""""""" FLOATERM
-" let g:floaterm_autoinsert = v:false
-
-"""""""""""""""""""" FUNCTIONS
-if (has('nvim'))
-  function! ToNVimVersion()
-    redir => s
-    silent! version
-    redir END
-    return matchstr(s, 'NVIM v\zs[^\n]*')
-  endfunction
-endif
 
 function! ShowSynStack()
   if !exists("*synstack")
