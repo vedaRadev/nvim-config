@@ -12,7 +12,7 @@ if (has('win32'))
   let $HOME = $USERPROFILE
 endif
 
-exe 'source ' . expand('%:p:h') . '/init.plugins.lua'
+exe 'source ' . fnamemodify($MYVIMRC, ':h') . '/init.plugins.lua'
 
 " TODO move into init.plugins.lua if using
 """""""""" GUTENTAGS
@@ -45,7 +45,8 @@ if (has('win32'))
   set shell=cmd
 endif
 
-let ayucolor = "dark"
+" color tokyonight
+
 color ayu
 hi normal guibg=black
 hi linenr guifg=slategrey
