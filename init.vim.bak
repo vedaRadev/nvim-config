@@ -13,11 +13,9 @@ if (has('win32'))
 endif
 
 exe 'source ' . fnamemodify($MYVIMRC, ':h') . '/init.plugins.lua'
-
-" TODO move into init.plugins.lua if using
-"""""""""" GUTENTAGS
-"let g:gutentags_ctags_exclude=['node_modules']
-"set statusline+=%{gutentags#statusline()}
+if (has('wsl'))
+  exe 'source ' . fnamemodify($MYVIMRC, ':h') . '/init.wsl.lua'
+endif
 
 syntax on
 set fileformats=unix,dos " remove this for DOS-style line endings
@@ -25,7 +23,6 @@ set autoindent
 set backspace=eol,indent,start
 set breakindent
 set cursorline
-set encoding=utf-8
 set linebreak
 set mouse-=a
 set noerrorbells
@@ -57,7 +54,6 @@ hi CocFadeOut guifg=dimgrey
 command! W w
 command! Q q
 command! Qa qa
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " TODO move plugin-specific mappings into init.plugins.vim
 let mapleader = ' '
@@ -71,21 +67,18 @@ nnoremap _ <c-w>_
 nnoremap <c-=> <c-w>=
 nnoremap <leader>= <c-w>=
 nnoremap <leader>\| <c-w>\|<c-w>20<
-nnoremap <c--> :ChooseWin<cr>
 nnoremap <leader>- :ChooseWin<cr>
 nnoremap <f1> :set rnu!<cr>
 nnoremap <f2> :set hlsearch!<cr>:set hlsearch?<cr>
 nnoremap <f3> :set spell!<cr>
-nnoremap <f4> :CocList diagnostics<cr>
 nnoremap <leader>fls mz[s1z=`z:delm z<cr>
-nnoremap <leader>ig :IndentGuidesToggle<cr>
-nnoremap <leader>ut :UndotreeToggle<cr>
 nnoremap <leader>sp mz<c-v>ip:sort<cr>`z:delm z<cr>
 nnoremap <leader>sib mz<s-v>i{:sort<cr>`z:delm z<cr>
 nnoremap <leader>O :NERDTreeToggle<cr>
 nnoremap <leader>ofd :NERDTreeFind<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>esd :CocDiagnostics<cr>
+nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>ff :Telescope find_files<cr>
+nnoremap <leader>lg :Telescope live_grep<cr>
 
 inoremap <Up> <nop>
 inoremap <Right> <nop>
@@ -110,7 +103,6 @@ augroup CursorLine
 	au WinLeave * setlocal nocursorline
 augroup END
 
-" can probably get rid of most of the abbreviations in here
 augroup JavascriptCode
 	au! 
 	au FileType javascript,javascriptreact :iabbr <buffer> clog console.log
