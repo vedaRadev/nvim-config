@@ -33,6 +33,7 @@ nmap('<leader>ff', ':Telescope find_files<cr>')
 nmap('<leader>lg', ':Telescope live_grep<cr>')
 nmap('K', ':lua vim.lsp.buf.hover()<cr>')
 nmap('<c-k>', ':lua vim.lsp.buf.signature_help()<cr>')
+
 nmap('<leader>gD', ':lua vim.lsp.buf.declaration()<cr>')
 nmap('<leader>gw', ':lua vim.lsp.buf.document_symbol()<cr>')
 nmap('<leader>gW', ':lua vim.lsp.buf.workspace_symbol()<cr>')
