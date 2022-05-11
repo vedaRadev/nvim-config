@@ -14,6 +14,7 @@ require('packer').startup(function()
   use 'norcalli/nvim-colorizer.lua'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
+  use { 'iamcco/markdown-preview.nvim', run = ':call mdkp#util#install()' }
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -125,9 +126,10 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 )
 
 local cmp_lsp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('nvim-lsp-installer').on_server_ready(function(server)
-  server:setup { capabilities = cmp_lsp_capabilities }
-end)
+require('nvim-lsp-installer').setup {}
+-- require('nvim-lsp-installer').on_server_ready(function(server)
+--   server:setup { capabilities = cmp_lsp_capabilities }
+-- end)
 
 -- vim.opt.foldmethod = 'expr'
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -146,3 +148,12 @@ vim.g['NERDTreeAutoCenter'] = 0
 
 vim.g['peekaboo_window'] = 'vert bo 50new'
 vim.g['peekaboo_delay'] = 500
+
+vim.cmd[[ au FileType c,cpp setlocal commentstring=//%s ]]
+
+-- vim.cmd([[
+-- augroup VimCommentaryConfig
+--   au!
+--   au FileType c,cpp setlocal commentstring=//\%s
+-- augroup END
+-- ]])
