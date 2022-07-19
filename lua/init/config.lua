@@ -1,29 +1,39 @@
-vim.opt.syntax         = 'off'
-vim.opt.fileformats    = { 'unix', 'dos' }
-vim.opt.number         = true
-vim.opt.relativenumber = true
-vim.opt.expandtab      = true
-vim.opt.tabstop        = 2
-vim.opt.shiftwidth     = 0
-vim.opt.softtabstop    = 0
-vim.opt.textwidth      = 100
-vim.opt.wrap					 = true
-vim.opt.linebreak			 = true
-vim.opt.breakindent		 = true
-vim.opt.hlsearch			 = false
-vim.opt.termguicolors  = true
-vim.opt.backspace			 = { 'eol', 'indent', 'start' }
+vim.opt.syntax          = 'off'
+vim.opt.fileformats     = { 'unix' }
+vim.opt.number          = true
+vim.opt.relativenumber  = true
+vim.opt.expandtab       = true
+vim.opt.tabstop         = 2
+vim.opt.shiftwidth      = 0
+vim.opt.softtabstop     = 0
+vim.opt.textwidth       = 100
+vim.opt.wrap					  = true
+vim.opt.linebreak			  = true
+vim.opt.breakindent		  = true
+vim.opt.hlsearch			  = false
+vim.opt.termguicolors   = true
+vim.opt.backspace			  = { 'eol', 'indent', 'start' }
+vim.opt.signcolumn      = 'yes'
+vim.opt.backup          = false
+vim.opt.cmdheight       = 1
+vim.opt.updatetime      = 300
+
+vim.opt.shortmess:append('c')
 
 vim.cmd[[command! W w]]
 vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
+-- vim.cmd([[
+-- color ayu
+-- hi normal guibg=black
+-- hi linenr guifg=slategrey
+-- hi cursorline guibg=#292929
+-- hi cursorlinenr guifg=hotpink
+-- ]])
+
 vim.cmd([[
-color ayu
-hi normal guibg=black
-hi linenr guifg=slategrey
-hi cursorline guibg=#292929
-hi cursorlinenr guifg=hotpink
+color tokyodark
 ]])
 
 -- TODO move augroups and autocommands to pure lua
