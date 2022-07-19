@@ -28,18 +28,36 @@ nmap('<leader>sp', 'mz<c-v>ip:sort<cr>`z:delm z<cr>')
 nmap('<leader>sib', 'mz<s-v>i{:sort<cr>`z:delm z<cr>')
 nmap('<leader>O', ':NERDTreeToggle<cr>')
 nmap('<leader>ofd', ':NERDTreeFind<cr>')
-nmap('<leader>gb', ':Git blame<cr>')
+-- nmap('<leader>gb', ':Git blame<cr>')
 nmap('<leader>ff', ':Telescope find_files<cr>')
 nmap('<leader>lg', ':Telescope live_grep<cr>')
+
+-- vim.cmd([[
+-- function! ShowDocumentation()
+--   if CocAction('hasProvider', 'hover')
+--     call CocActionAsync('doHover')
+--   else
+--     call feedkeys('K', 'in')
+--   endif
+-- endfunction
+-- ]])
+
+-- nmap('K', ':call ShowDocumentation()<cr>')
+-- nmap('<leader>rn', '<Plug>(coc-rename)')
+-- nmap('gd', '<Plug>(coc-definition)')
+-- nmap('gy', '<Plug>(coc-type-definition)')
+-- nmap('gr', '<Plug>(coc-reference)')
+-- nmap('<leader>gi', '<Plug>(coc-implementation)')
+-- nmap('<leader>ca', ':CocAction<cr>')
+
 nmap('K', ':lua vim.lsp.buf.hover()<cr>')
 nmap('<c-k>', ':lua vim.lsp.buf.signature_help()<cr>')
-
-nmap('<leader>gD', ':lua vim.lsp.buf.declaration()<cr>')
+nmap('<leader>gd', ':lua vim.lsp.buf.declaration()<cr>')
 nmap('<leader>gw', ':lua vim.lsp.buf.document_symbol()<cr>')
 nmap('<leader>gW', ':lua vim.lsp.buf.workspace_symbol()<cr>')
 nmap('<leader>gr', ':lua vim.lsp.buf.references()<cr>')
 nmap('<leader>gt', ':lua vim.lsp.buf.type_definition()<cr>')
-nmap('<leader>af', ':lua vim.lsp.buf.code_action()<cr>')
+nmap('<leader>ca', ':lua vim.lsp.buf.code_action()<cr>')
 nmap('<leader>rn', ':lua vim.lsp.buf.rename()<cr>')
 
 imap('<Up>', '<nop>')

@@ -1,6 +1,11 @@
 require('packer').startup(function()
+  -- TODO set up these plugins
+  -- use 'jbyuki/venn.nvim' -- ascii diagrams
+
+  -- UNUSED
+  -- use 'glepnir/dashboard-nvim' -- don't like the current version
+
   use 'wbthomason/packer.nvim'
-  use 'glepnir/dashboard-nvim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
@@ -14,7 +19,14 @@ require('packer').startup(function()
   use 'norcalli/nvim-colorizer.lua'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
-  use { 'iamcco/markdown-preview.nvim', run = ':call mdkp#util#install()' }
+
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = function()
+      vim.fn['mkdp#util#install']()
+    end,
+    ft = 'markdown',
+  }
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -29,11 +41,10 @@ require('packer').startup(function()
 
 			'dcampos/nvim-snippy',
 			'dcampos/cmp-snippy',
-			-- 'hrsh7th/vim-vsnip',
-			-- 'hrsh7th/cmp-vsnip',
-
 		},
 	}
+
+  use { 'akinsho/bufferline.nvim', tag = 'v2.*', requires = 'kyazdani42/nvim-web-devicons' }
 
 	-- TODO check if we're on windows and use the windows-specific install for tabnine
 	use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
@@ -45,6 +56,8 @@ require('packer').startup(function()
   use 'kadekillary/Turtles'
   use 'tyrannicaltoucan/vim-deep-space'
   use 'folke/tokyonight.nvim'
+  use { 'pineapplegiant/spaceduck', branch = 'main' }
+  use 'tiagovla/tokyodark.nvim'
 
   -- stuff requiring extra options
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -61,14 +74,21 @@ require('packer').startup(function()
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
+
 end)
+
+require('bufferline').setup{
+  options = {
+    mode = 'tabs',
+    diagnostics = 'nvim_lsp'
+  }
+}
 
 -- local lualine_config = require('lualine.evil-lualine')
 require('lualine').setup(require('lualine.evil-lualine'))
 -- require('lualine').setup{ options = { theme = 'ayu_dark' } }
 
 require('nvim-treesitter.configs').setup {
-  -- Make sure these are installed
   ensure_installed = 'all',
 
   -- install parsers asynchronously
@@ -82,7 +102,6 @@ local cmp = require('cmp')
 cmp.setup {
 	snippet = {
 		expand = function(args)
-			-- vim.fn['vsnip#anonymous'](args.body)
 			require('snippy').expand_snippet(args.body)
 		end
 	},
@@ -102,7 +121,6 @@ cmp.setup {
 			{ name = 'nvim_lsp' },
 			{ name = 'cmp_tabnine' },
 			{ name = 'snippy' },
-			-- { name = 'vsnip' }
 		},
 		{
 			{ name = 'buffer' },
@@ -126,15 +144,14 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 )
 
 local cmp_lsp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('nvim-lsp-installer').setup {}
--- require('nvim-lsp-installer').on_server_ready(function(server)
---   server:setup { capabilities = cmp_lsp_capabilities }
--- end)
-
--- vim.opt.foldmethod = 'expr'
--- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-
-vim.g.dashboard_default_executive = 'telescope'
+require('nvim-lsp-installer').setup {} -- this MUST come before lspconfig setup
+local lspconfig = require('lspconfig')
+lspconfig.tsserver.setup { capabilities = cmp_lsp_capabilities }
+lspconfig.sumneko_lua.setup { capabilities = cmp_lsp_capabilities }
+lspconfig.html.setup { capabilities = cmp_lsp_capabilities }
+lspconfig.clangd.setup { capabilities = cmp_lsp_capabilities }
+lspconfig.jsonls.setup { capabilities = cmp_lsp_capabilities }
+lspconfig.yamlls.setup { capabilities = cmp_lsp_capabilities }
 
 vim.g['airline_powerline_fonts'] = 0 -- pretty airline with powerline fonts
 vim.g['airline#extensions#branch#enabled'] = 1
@@ -150,10 +167,3 @@ vim.g['peekaboo_window'] = 'vert bo 50new'
 vim.g['peekaboo_delay'] = 500
 
 vim.cmd[[ au FileType c,cpp setlocal commentstring=//%s ]]
-
--- vim.cmd([[
--- augroup VimCommentaryConfig
---   au!
---   au FileType c,cpp setlocal commentstring=//\%s
--- augroup END
--- ]])
