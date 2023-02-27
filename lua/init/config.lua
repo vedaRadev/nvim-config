@@ -32,8 +32,13 @@ vim.cmd[[command! Qa qa]]
 -- hi cursorlinenr guifg=hotpink
 -- ]])
 
+-- vim.cmd([[ color tokyodark ]])
+
 vim.cmd([[
-color tokyodark
+color spaceduck
+hi comment gui=italic guifg=#52587f
+hi identifier gui=italic
+hi todo guibg=red
 ]])
 
 -- TODO move augroups and autocommands to pure lua
@@ -55,10 +60,14 @@ augroup END
 
 augroup MarkdownFiles
 au!
-
 au FileType markdown :set spell
 au FileType markdown :set tw=0 " don't want auto line breaks in markdown
 au FileType markdown nnoremap <buffer> <leader>mdu- yyp<s-v>r-
 au FileType markdown nnoremap <buffer> <leader>mdu= yyp<s-v>r=
+augroup END
+
+augroup BashFiles
+au!
+au FileType sh :set tw=0
 augroup END
 ]])

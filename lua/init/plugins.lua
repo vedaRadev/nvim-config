@@ -2,9 +2,6 @@ require('packer').startup(function()
   -- TODO set up these plugins
   -- use 'jbyuki/venn.nvim' -- ascii diagrams
 
-  -- UNUSED
-  -- use 'glepnir/dashboard-nvim' -- don't like the current version
-
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
@@ -17,8 +14,11 @@ require('packer').startup(function()
   use 'godlygeek/tabular'
   use 'scrooloose/nerdtree'
   use 'norcalli/nvim-colorizer.lua'
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig'
+  }
 
   use {
     'iamcco/markdown-preview.nvim',
@@ -47,7 +47,7 @@ require('packer').startup(function()
   use { 'akinsho/bufferline.nvim', tag = 'v2.*', requires = 'kyazdani42/nvim-web-devicons' }
 
 	-- TODO check if we're on windows and use the windows-specific install for tabnine
-	use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
+	-- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 	-- windows version below
 	-- use { 'tzachar/cmp-tabnine, after = 'nvim-cmp', run = 'powershell ./install.ps1', requires = 'hrsh7th/nvim-cmp' }
 
@@ -119,7 +119,7 @@ cmp.setup {
 	sources = cmp.config.sources(
 		{
 			{ name = 'nvim_lsp' },
-			{ name = 'cmp_tabnine' },
+			-- { name = 'cmp_tabnine' },
 			{ name = 'snippy' },
 		},
 		{
@@ -143,15 +143,35 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 	{ update_in_insert = false }
 )
 
-local cmp_lsp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('nvim-lsp-installer').setup {} -- this MUST come before lspconfig setup
+-- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
+local lsp_defaults = {
+  flags = {
+    debounce_text_changes = 150
+  },
+  capabilities = require('cmp_nvim_lsp').update_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+  ),
+  on_attach = function(client, buffer_number)
+    vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+  end
+}
+
 local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup { capabilities = cmp_lsp_capabilities }
-lspconfig.sumneko_lua.setup { capabilities = cmp_lsp_capabilities }
-lspconfig.html.setup { capabilities = cmp_lsp_capabilities }
-lspconfig.clangd.setup { capabilities = cmp_lsp_capabilities }
-lspconfig.jsonls.setup { capabilities = cmp_lsp_capabilities }
-lspconfig.yamlls.setup { capabilities = cmp_lsp_capabilities }
+lspconfig.util.default_config = vim.tbl_deep_extend(
+  'force',
+  lspconfig.util.default_config,
+  lsp_defaults
+)
+
+require('mason').setup()
+require('mason-lspconfig').setup()
+lspconfig.tsserver.setup({})
+lspconfig.sumneko_lua.setup({})
+lspconfig.html.setup({})
+lspconfig.clangd.setup({})
+lspconfig.jsonls.setup({})
+lspconfig.yamlls.setup({})
+lspconfig.bashls.setup({})
 
 vim.g['airline_powerline_fonts'] = 0 -- pretty airline with powerline fonts
 vim.g['airline#extensions#branch#enabled'] = 1
