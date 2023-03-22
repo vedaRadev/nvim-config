@@ -36,6 +36,7 @@ require('packer').startup(function()
 			'hrsh7th/cmp-buffer',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-cmdline',
 			'f3fora/cmp-spell',
 			'octaltree/cmp-look',
 
@@ -148,7 +149,7 @@ local lsp_defaults = {
   flags = {
     debounce_text_changes = 150
   },
-  capabilities = require('cmp_nvim_lsp').update_capabilities(
+  capabilities = require('cmp_nvim_lsp').default_capabilities(
     vim.lsp.protocol.make_client_capabilities()
   ),
   on_attach = function(client, buffer_number)
@@ -166,12 +167,13 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 require('mason').setup()
 require('mason-lspconfig').setup()
 lspconfig.tsserver.setup({})
-lspconfig.sumneko_lua.setup({})
+lspconfig.lua_ls.setup({})
 lspconfig.html.setup({})
 lspconfig.clangd.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.yamlls.setup({})
 lspconfig.bashls.setup({})
+lspconfig.rust_analyzer.setup({})
 
 vim.g['airline_powerline_fonts'] = 0 -- pretty airline with powerline fonts
 vim.g['airline#extensions#branch#enabled'] = 1
