@@ -28,9 +28,9 @@ nmap('<leader>sp', 'mz<c-v>ip:sort<cr>`z:delm z<cr>')
 nmap('<leader>sib', 'mz<s-v>i{:sort<cr>`z:delm z<cr>')
 nmap('<leader>O', ':NERDTreeToggle<cr>')
 nmap('<leader>ofd', ':NERDTreeFind<cr>')
--- nmap('<leader>gb', ':Git blame<cr>')
 nmap('<leader>ff', ':Telescope find_files<cr>')
 nmap('<leader>lg', ':Telescope live_grep<cr>')
+nmap('<leader>tt', ':TroubleToggle<cr>')
 
 -- vim.cmd([[
 -- function! ShowDocumentation()

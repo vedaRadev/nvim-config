@@ -3,16 +3,16 @@ vim.opt.fileformats     = { 'unix' }
 vim.opt.number          = true
 vim.opt.relativenumber  = true
 vim.opt.expandtab       = true
-vim.opt.tabstop         = 2
+vim.opt.tabstop         = 4
 vim.opt.shiftwidth      = 0
-vim.opt.softtabstop     = 0
+vim.opt.softtabstop     = 4
 vim.opt.textwidth       = 100
-vim.opt.wrap					  = true
-vim.opt.linebreak			  = true
-vim.opt.breakindent		  = true
-vim.opt.hlsearch			  = false
+vim.opt.wrap			= true
+vim.opt.linebreak		= true
+vim.opt.breakindent	    = true
+vim.opt.hlsearch		= false
 vim.opt.termguicolors   = true
-vim.opt.backspace			  = { 'eol', 'indent', 'start' }
+vim.opt.backspace		= { 'eol', 'indent', 'start' }
 vim.opt.signcolumn      = 'yes'
 vim.opt.backup          = false
 vim.opt.cmdheight       = 1
@@ -50,6 +50,12 @@ au VimEnter * setlocal cursorline
 au WinEnter * setlocal cursorline
 au BufWinEnter * setlocal cursorline
 au WinLeave * setlocal nocursorline
+augroup END
+
+augroup Formatting
+au!
+au FileType javascript,javascriptreact,typescript,typescriptreact,json :set ts=2
+au FileType javascript,javascriptreact,typescript,typescriptreact,json :set sts=0
 augroup END
 
 " augroup JavascriptCode
