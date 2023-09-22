@@ -21,6 +21,14 @@ require('packer').startup(function()
   }
 
   use {
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
+
+  use {
     'iamcco/markdown-preview.nvim',
     run = function()
       vim.fn['mkdp#util#install']()
@@ -173,7 +181,21 @@ lspconfig.clangd.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.yamlls.setup({})
 lspconfig.bashls.setup({})
-lspconfig.rust_analyzer.setup({})
+lspconfig.groovyls.setup({})
+lspconfig.sqlls.setup({})
+lspconfig.rust_analyzer.setup({
+  settings = {
+    ['rust-analyzer'] = {
+      checkOnSave = {
+        allFeatures = true,
+        overrideCommand = {
+          'cargo', 'clippy', '--workspace', '--message-format=json',
+          '--all-targets', '--all-features'
+        }
+      }
+    }
+  }
+})
 
 vim.g['airline_powerline_fonts'] = 0 -- pretty airline with powerline fonts
 vim.g['airline#extensions#branch#enabled'] = 1
