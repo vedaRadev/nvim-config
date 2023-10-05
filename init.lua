@@ -12,14 +12,14 @@ end
 -- for now just assuming its symlinked in a dir in /usr/bin
 if (vim.fn.has('wsl') == 1) then
 	vim.g.clipboard = {
-		name = 'win32yank-wsl',
+		name = 'WslClipboard',
 		copy = {
-			['+'] = '/usr/bin/win32yank/win32yank.exe -i --crlf',
-			['*'] = '/usr/bin/win32yank/win32yank.exe -i --crlf',
+			['+'] = 'clip.exe',
+			['*'] = 'clip.exe',
 		},
 		paste = {
-			['+'] = '/usr/bin/win32yank/win32yank.exe -o --crlf',
-			['*'] = '/usr/bin/win32yank/win32yank.exe -o --crlf',
+			['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
 		},
 		cache_enable = 0
 	}
