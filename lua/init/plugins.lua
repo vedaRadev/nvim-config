@@ -33,7 +33,6 @@ require('packer').startup(function()
         run = function()
             vim.fn['mkdp#util#install']()
         end,
-        ft = 'markdown',
     }
 
     use {
@@ -53,7 +52,7 @@ require('packer').startup(function()
         },
     }
 
-    use { 'akinsho/bufferline.nvim', tag = 'v2.*', requires = 'kyazdani42/nvim-web-devicons' }
+    use { 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons' }
 
     -- TODO check if we're on windows and use the windows-specific install for tabnine
     -- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
