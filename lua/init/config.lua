@@ -24,21 +24,9 @@ vim.cmd[[command! W w]]
 vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
--- vim.cmd([[
--- color ayu
--- hi normal guibg=black
--- hi linenr guifg=slategrey
--- hi cursorline guibg=#292929
--- hi cursorlinenr guifg=hotpink
--- ]])
-
--- vim.cmd([[ color tokyodark ]])
-
 vim.cmd([[
-color spaceduck
-hi comment gui=italic guifg=#52587f
-hi identifier gui=italic
-hi todo guibg=red
+color torte
+"hi normal guibg=black "only if needed
 ]])
 
 -- TODO move augroups and autocommands to pure lua
@@ -46,10 +34,9 @@ hi todo guibg=red
 vim.cmd([[
 augroup CursorLine
 au!
-au VimEnter * setlocal cursorline
-au WinEnter * setlocal cursorline
-au BufWinEnter * setlocal cursorline
-au WinLeave * setlocal nocursorline
+au VimEnter,ColorScheme * set cursorline
+au VimEnter,ColorScheme * hi clear cursorline
+au VimEnter,ColorScheme * hi cursorlinenr guibg=background
 augroup END
 
 augroup Formatting
@@ -57,12 +44,6 @@ au!
 au FileType javascript,javascriptreact,typescript,typescriptreact,json :set ts=2
 au FileType javascript,javascriptreact,typescript,typescriptreact,json :set sts=0
 augroup END
-
-" augroup JavascriptCode
-"		au! 
-"		au FileType javascript,javascriptreact :iabbr <buffer> clog console.log
-"		au FileType javascript,javascriptreact :cabbr <buffer> clog console.log
-"	augroup END
 
 augroup MarkdownFiles
 au!
