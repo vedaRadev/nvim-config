@@ -26,11 +26,29 @@ vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
 color retrobox
-hi normal guibg=black "only if needed
+hi normal guibg=black
+hi normalfloat guibg=#151515
 hi number guifg=peachpuff
-hi string guifg=dodgerblue
+hi float guifg=peachpuff
+hi boolean guifg=peachpuff
+hi constant guifg=peachpuff gui=italic
+hi character guifg=peachpuff
+hi macro guifg=violetred
+hi string guifg=dodgerblue guibg=#171717
+hi storageclass gui=italic
 hi comment guifg=dimgray
+hi operator guifg=peachpuff
+hi todo guibg=darkred
 ]])
+
+-- vim.cmd([[
+-- let g:alduin_Shout_Fire_Breath=0 "1 = deep red for special highlight groups
+-- let g:alduin_Shout_Aura_Whisper=0 "1 = remove block matchparens and add underline
+-- let g:alduin_Shout_Dragon_Aspect=0 "1 = almost black background
+-- let g:alduin_Shout_Become_Ethereal=1 "1 = black background
+-- let g:alduin_Shout_Animal_Allegiance=0 "1 = remove string bg
+-- color alduin
+-- ]])
 
 -- TODO move augroups and autocommands to pure lua
 -- https://gist.github.com/numToStr/1ab83dd2e919de9235f9f774ef8076da

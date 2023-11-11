@@ -1,4 +1,5 @@
 require('packer').startup(function()
+
     -- TODO set up these plugins
     -- use 'jbyuki/venn.nvim' -- ascii diagrams
 
@@ -66,6 +67,19 @@ require('packer').startup(function()
     use 'folke/tokyonight.nvim'
     use { 'pineapplegiant/spaceduck', branch = 'main' }
     use 'tiagovla/tokyodark.nvim'
+    use 'chase/focuspoint-vim'
+    use 'NLKNguyen/papercolor-theme'
+    use 'christophermca/meta5'
+    use 'TheNiteCoder/mountaineer.vim'
+    use 'fcpg/vim-orbital'
+    use 'jaredgorski/SpaceCamp'
+    use 'tomasr/molokai'
+    use 'srcery-colors/srcery-vim'
+    use 'fenetikm/falcon'
+    use 'AlessandroYorba/Alduin'
+    use 'stankovictab/mgz.nvim'
+    use 'Aryansh-S/fastdark.vim'
+    use 'gtr/rza'
 
     -- stuff requiring extra options
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
