@@ -25,8 +25,11 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
-color torte
-"hi normal guibg=black "only if needed
+color retrobox
+hi normal guibg=black "only if needed
+hi number guifg=peachpuff
+hi string guifg=dodgerblue
+hi comment guifg=dimgray
 ]])
 
 -- TODO move augroups and autocommands to pure lua
