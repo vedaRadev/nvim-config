@@ -106,9 +106,70 @@ require('bufferline').setup{
     }
 }
 
--- local lualine_config = require('lualine.evil-lualine')
-require('lualine').setup(require('lualine.evil-lualine'))
--- require('lualine').setup{ options = { theme = 'ayu_dark' } }
+--require('lualine').setup(require('lualine.evil-lualine'))
+local function get_active_lsp()
+    local msg = 'No Active Lsp'
+    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    local clients = vim.lsp.get_active_clients()
+
+    if next(clients) == nil then return msg end
+
+    for _, client in ipairs(clients) do
+        local filetypes = client.config.filetypes
+        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+            return client.name
+        end
+    end
+
+    return msg
+end
+
+local function lsp_reporter()
+    return 'LSP: ' .. get_active_lsp()
+end
+
+require('lualine').setup{
+    options = {
+        theme = 'auto',
+        icons_enabled = false,
+        component_separators = { left = '|', right = '|' },
+        section_separators = { left = '', right = '' },
+        always_divide_middle = false,
+        globalstatus = false,
+    },
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'filename', lsp_reporter, 'encoding' },
+        lualine_c = {
+            {
+                'branch',
+                separator = ''
+            },
+            {
+                'diff',
+                separator = '',
+                colored = true,
+                diff_color = {
+                    added = { fg = 'lawngreen', bg = 'black' },
+                    modified = { fg = 'darkorange', bg = 'black' },
+                    removed = { fg = 'red', bg = 'black' },
+                },
+            },
+            'diagnostics',
+        },
+        lualine_x = {},
+        lualine_y = { 'searchcount', 'selectioncount' },
+        lualine_z = { 'location', 'progress' },
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    }
+}
 
 require('nvim-treesitter.configs').setup {
     ensure_installed = 'all',
@@ -209,12 +270,6 @@ lspconfig.rust_analyzer.setup({
         }
     }
 })
-
-vim.g['airline_powerline_fonts'] = 0 -- pretty airline with powerline fonts
-vim.g['airline#extensions#branch#enabled'] = 1
-vim.g['airline_theme'] = 'turtles'
-vim.g['airline#extensions#tabline#enabled'] = 1
-vim.g['airline_section_b'] = '%{strftime("%H:%M")}'
 
 vim.g['choosewin_overlay_enable'] = 1
 
