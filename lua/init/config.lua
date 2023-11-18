@@ -24,36 +24,6 @@ vim.cmd[[command! W w]]
 vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
--- -- chalkboard theme wip
--- vim.cmd([[
--- color default
--- hi normal guibg=#0F2410
--- hi normalfloat guibg=#151515
--- hi linenr guifg=oldlace
--- hi comment guifg=dimgray
--- hi number guifg=oldlace
--- hi float guifg=oldlace
--- hi boolean guifg=oldlace
--- hi string guifg=oldlace
--- hi identifier guifg=oldlace
--- hi specialchar guifg=oldlace
--- hi conditional guifg=oldlace
--- hi statement guifg=oldlace
--- hi delimiter guifg=oldlace
--- hi structure guifg=oldlace
--- hi constant guifg=oldlace
--- hi operator guifg=oldlace
--- hi keyword guifg=oldlace
--- hi storageclass guifg=oldlace
--- hi macro guifg=oldlace
--- hi type guifg=oldlace
--- hi import guifg=oldlace
--- hi preproc guifg=oldlace
--- hi todo gui=inverse guifg=firebrick
--- hi special guifg=oldlace
--- hi cursorlinenr guifg=oldlace
--- ]])
-
 vim.cmd([[
 color retrobox
 
@@ -67,7 +37,7 @@ hi boolean guifg=peachpuff
 hi character guifg=peachpuff
 hi macro guifg=mediumorchid
 hi string guifg=peachpuff guibg=#1D1D1D
-hi storageclass gui=italic guifg=darkorange
+hi storageclass gui=italic guifg=#ff7900
 hi comment guifg=dimgray
 hi operator guifg=peachpuff
 hi delimiter guifg=peachpuff
@@ -76,10 +46,11 @@ hi function guifg=olivedrab
 hi identifier guifg=cadetblue
 hi structure guifg=#fabd2f
 hi include guifg=mediumorchid
-hi special guifg=#fe8019
+hi special guifg=#ff7900
 hi preproc guifg=mediumorchid
 hi directory guifg=olivedrab
 hi title guifg=olivedrab
+hi underlined guifg=mediumorchid
 
 hi clear constant
 ]])

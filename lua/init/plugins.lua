@@ -249,7 +249,7 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 require('mason').setup()
 require('mason-lspconfig').setup()
 lspconfig.tsserver.setup({})
-lspconfig.lua_ls.setup({})
+--lspconfig.lua_ls.setup({})
 lspconfig.html.setup({})
 lspconfig.clangd.setup({})
 lspconfig.jsonls.setup({})
@@ -257,6 +257,7 @@ lspconfig.yamlls.setup({})
 lspconfig.bashls.setup({})
 lspconfig.groovyls.setup({})
 lspconfig.sqlls.setup({})
+lspconfig.gdscript.setup({})
 lspconfig.rust_analyzer.setup({
     settings = {
         ['rust-analyzer'] = {
