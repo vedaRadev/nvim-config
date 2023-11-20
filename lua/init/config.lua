@@ -52,6 +52,8 @@ hi directory guifg=olivedrab
 hi title guifg=olivedrab
 hi underlined guifg=mediumorchid
 
+hi @string.yaml guibg=background
+
 hi clear constant
 ]])
 
