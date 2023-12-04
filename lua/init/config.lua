@@ -51,6 +51,10 @@ hi preproc guifg=mediumorchid
 hi directory guifg=olivedrab
 hi title guifg=olivedrab
 hi underlined guifg=mediumorchid
+hi keyword guifg=#DD2525
+hi conditional guifg=#DD2525
+hi repeat guifg=#DD2525
+hi specialchar guifg=#DD2525
 
 hi @string.yaml guibg=background
 
