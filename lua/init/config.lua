@@ -25,39 +25,47 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
-color retrobox
-
-hi normal guibg=black
-hi normalfloat guibg=#001500
+hi normal guifg=peachpuff guibg=#050a05
+hi normalfloat guibg=#001c00
 hi linenr guifg=dimgray
-hi cursorlinenr guifg=#fabd2f
+hi cursorlinenr guifg=#fb9900
 hi number guifg=peachpuff
 hi float guifg=peachpuff
 hi boolean guifg=peachpuff
 hi character guifg=peachpuff
-hi macro guifg=mediumorchid
-hi string guifg=peachpuff guibg=#1D1D1D
+hi macro guifg=#c853ff
+hi string guifg=peachpuff guibg=#262626
 hi storageclass gui=italic guifg=#ff7900
-hi comment guifg=dimgray
+hi comment guifg=#707070
 hi operator guifg=peachpuff
 hi delimiter guifg=peachpuff
-hi todo guibg=darkred
-hi function guifg=olivedrab
-hi identifier guifg=cadetblue
-hi structure guifg=#fabd2f
-hi include guifg=mediumorchid
-hi special guifg=#ff7900
-hi preproc guifg=mediumorchid
-hi directory guifg=olivedrab
-hi title guifg=olivedrab
-hi underlined guifg=mediumorchid
-hi keyword guifg=#DD2525
-hi conditional guifg=#DD2525
-hi repeat guifg=#DD2525
-hi specialchar guifg=#DD2525
-hi exception guifg=#DD2525
+hi function guifg=#7ca900
+hi identifier guifg=peachpuff
+hi statement guifg=peachpuff
+hi structure guifg=#fb9900
+hi type guifg=#fb9900
+hi include guifg=#c853ff
+hi special guifg=#4ba2ff
+hi preproc guifg=#c853ff
+hi directory guifg=#7ca900
+hi title guifg=#7ca900
+hi underlined guifg=#c853ff
+hi keyword guifg=#ec1f1f
+hi conditional guifg=#ec1f1f
+hi repeat guifg=#ec1f1f
+hi specialchar guifg=#4ba2ff
+hi exception guifg=#ec1f1f
+hi visual guibg=#002600
+
+hi diagnosticwarn guifg=#fb9900
+hi diagnosticinfo guifg=#4ba2ff
 
 hi @string.yaml guibg=background
+hi @variable guifg=peachpuff
+hi @comment.todo.comment guifg=black guibg=#fb9900
+hi @comment.warn.comment guifg=black guibg=#fb9900
+hi @comment.note.comment guifg=black guibg=#4ba2ff
+hi @comment.error.comment guifg=black guibg=#ec1f1f
 
 hi clear constant
 ]])

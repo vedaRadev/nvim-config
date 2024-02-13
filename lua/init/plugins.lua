@@ -81,6 +81,9 @@ require('packer').startup(function()
     use 'Aryansh-S/fastdark.vim'
     use 'gtr/rza'
 
+    -- fun stuff
+    use 'eandrju/cellular-automaton.nvim'
+
     -- stuff requiring extra options
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
