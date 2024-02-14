@@ -26,7 +26,7 @@ vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
 
-hi normal guifg=peachpuff guibg=#050a05
+hi normal guifg=peachpuff guibg=#041004
 hi normalfloat guibg=#060606
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
@@ -56,7 +56,7 @@ hi conditional guifg=#ec1f1f
 hi repeat guifg=#ec1f1f
 hi specialchar guifg=#4ba2ff
 hi exception guifg=#ec1f1f
-hi visual guibg=#002600
+hi visual guifg=black guibg=#707070
 
 hi diagnosticerror guifg=#ec1f1f
 hi diagnosticwarn guifg=#fb9900
