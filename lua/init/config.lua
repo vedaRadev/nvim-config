@@ -25,8 +25,9 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
+
 hi normal guifg=peachpuff guibg=#050a05
-hi normalfloat guibg=#001c00
+hi normalfloat guibg=#060606
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
 hi number guifg=peachpuff
@@ -57,8 +58,16 @@ hi specialchar guifg=#4ba2ff
 hi exception guifg=#ec1f1f
 hi visual guibg=#002600
 
+hi diagnosticerror guifg=#ec1f1f
 hi diagnosticwarn guifg=#fb9900
 hi diagnosticinfo guifg=#4ba2ff
+hi diagnostichint guifg=#c853ff
+
+hi! link diffLine special
+hi! link diffAdded function
+hi! link diffRemoved keyword
+
+hi spellbad guifg=#ec1f1f
 
 hi @string.yaml guibg=background
 hi @variable guifg=peachpuff
