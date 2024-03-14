@@ -25,9 +25,10 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
-
-hi normal guifg=peachpuff guibg=#041004
-hi normalfloat guibg=#060606
+"hi normal guifg=peachpuff guibg=#041004
+"hi normalfloat guibg=#060606
+hi normal guifg=peachpuff guibg=#060606
+hi normalfloat guibg=#041004
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
 hi number guifg=peachpuff

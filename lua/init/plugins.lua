@@ -252,6 +252,7 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 require('mason').setup()
 require('mason-lspconfig').setup()
 lspconfig.tsserver.setup({})
+lspconfig.cssls.setup({})
 --lspconfig.lua_ls.setup({})
 lspconfig.html.setup({})
 lspconfig.clangd.setup({})
