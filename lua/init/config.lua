@@ -113,8 +113,8 @@ au FileType markdown nnoremap <buffer> <leader>mdu- yyp<s-v>r-
 au FileType markdown nnoremap <buffer> <leader>mdu= yyp<s-v>r=
 augroup END
 
-augroup BashFiles
+augroup TextWidth
 au!
-au FileType sh :set tw=0
+au FileType sh,html :set tw=0
 augroup END
 ]])
