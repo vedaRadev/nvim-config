@@ -262,6 +262,7 @@ lspconfig.bashls.setup({})
 lspconfig.groovyls.setup({})
 lspconfig.sqlls.setup({})
 lspconfig.gdscript.setup({})
+lspconfig.csharp_ls.setup({})
 lspconfig.rust_analyzer.setup({
     settings = {
         ['rust-analyzer'] = {
