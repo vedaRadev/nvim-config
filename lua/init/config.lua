@@ -67,6 +67,7 @@ hi diagnostichint guifg=#c853ff
 hi! link diffLine special
 hi! link diffAdded function
 hi! link diffRemoved keyword
+hi! link @function.macro macro
 
 hi spellbad guifg=#ec1f1f
 
