@@ -43,22 +43,14 @@ require('packer').startup(function()
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
-            'hrsh7th/cmp-calc',
             'hrsh7th/cmp-cmdline',
-            'f3fora/cmp-spell',
             'octaltree/cmp-look',
-
             'dcampos/nvim-snippy',
             'dcampos/cmp-snippy',
         },
     }
 
     use { 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons' }
-
-    -- TODO check if we're on windows and use the windows-specific install for tabnine
-    -- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
-    -- windows version below
-    -- use { 'tzachar/cmp-tabnine, after = 'nvim-cmp', run = 'powershell ./install.ps1', requires = 'hrsh7th/nvim-cmp' }
 
     -- colorschemes/themes
     use 'ayu-theme/ayu-vim'
@@ -80,9 +72,6 @@ require('packer').startup(function()
     use 'stankovictab/mgz.nvim'
     use 'Aryansh-S/fastdark.vim'
     use 'gtr/rza'
-
-    -- fun stuff
-    use 'eandrju/cellular-automaton.nvim'
 
     -- stuff requiring extra options
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -205,7 +194,6 @@ cmp.setup {
     sources = cmp.config.sources(
         {
             { name = 'nvim_lsp' },
-            -- { name = 'cmp_tabnine' },
             { name = 'snippy' },
         },
         {
@@ -253,14 +241,14 @@ require('mason').setup()
 require('mason-lspconfig').setup()
 lspconfig.tsserver.setup({})
 lspconfig.cssls.setup({})
---lspconfig.lua_ls.setup({})
+-- lspconfig.lua_ls.setup({})
 lspconfig.html.setup({})
 lspconfig.clangd.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.yamlls.setup({})
 lspconfig.bashls.setup({})
-lspconfig.groovyls.setup({})
-lspconfig.sqlls.setup({})
+-- lspconfig.groovyls.setup({})
+-- lspconfig.sqlls.setup({})
 lspconfig.gdscript.setup({})
 -- lspconfig.csharp_ls.setup({})
 lspconfig.rust_analyzer.setup({
