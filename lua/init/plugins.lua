@@ -262,7 +262,7 @@ lspconfig.bashls.setup({})
 lspconfig.groovyls.setup({})
 lspconfig.sqlls.setup({})
 lspconfig.gdscript.setup({})
-lspconfig.csharp_ls.setup({})
+-- lspconfig.csharp_ls.setup({})
 lspconfig.rust_analyzer.setup({
     settings = {
         ['rust-analyzer'] = {
@@ -284,4 +284,4 @@ vim.g['NERDTreeAutoCenter'] = 0
 vim.g['peekaboo_window'] = 'vert bo 50new'
 vim.g['peekaboo_delay'] = 500
 
-vim.cmd[[ au FileType c,cpp setlocal commentstring=//%s ]]
+vim.cmd[[ au FileType c,cpp,cs setlocal commentstring=//%s ]]
