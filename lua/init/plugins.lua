@@ -122,7 +122,7 @@ end
 
 require('lualine').setup{
     options = {
-        theme = 'auto',
+        theme = '16color',
         icons_enabled = false,
         component_separators = { left = '|', right = '|' },
         section_separators = { left = '', right = '' },
@@ -167,7 +167,7 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = 'all',
 
     -- install parsers asynchronously
-    sync_install = false,
+    sync_install = true,
 
     highlight = { enable = true },
     indent = { enable = true },
