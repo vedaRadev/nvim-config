@@ -50,7 +50,7 @@ require('packer').startup(function()
         },
     }
 
-    use { 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons' }
+    -- use { 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons' }
 
     -- colorschemes/themes
     use 'ayu-theme/ayu-vim'
@@ -91,12 +91,12 @@ require('packer').startup(function()
 
 end)
 
-require('bufferline').setup{
-    options = {
-        mode = 'tabs',
-        diagnostics = 'nvim_lsp'
-    }
-}
+-- require('bufferline').setup{
+--     options = {
+--         mode = 'tabs',
+--         diagnostics = 'nvim_lsp'
+--     }
+-- }
 
 --require('lualine').setup(require('lualine.evil-lualine'))
 local function get_active_lsp()
