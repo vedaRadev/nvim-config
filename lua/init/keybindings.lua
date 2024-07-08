@@ -32,7 +32,7 @@ nmap('<leader>TT', ':Telescope<cr>')
 nmap('<leader>ff', ':Telescope find_files<cr>')
 nmap('<leader>lg', ':Telescope live_grep<cr>')
 nmap('<leader>lr', ':Telescope lsp_references<cr>')
-nmap('<leader>tt', ':TroubleToggle<cr>')
+nmap('<leader>tt', ':Trouble diagnostics toggle<cr>')
 
 -- vim.cmd([[
 -- function! ShowDocumentation()

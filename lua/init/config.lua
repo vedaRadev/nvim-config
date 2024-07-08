@@ -59,10 +59,17 @@ hi specialchar guifg=#4ba2ff
 hi exception guifg=#ec1f1f
 hi visual guifg=black guibg=#707070
 
-hi diagnosticerror guifg=#ec1f1f
-hi diagnosticwarn guifg=#fb9900
-hi diagnosticinfo guifg=#4ba2ff
-hi diagnostichint guifg=#c853ff
+hi DiagnosticError guifg=#ec1f1f
+hi DiagnosticUnderlineError guisp=#ec1f1f
+
+hi DiagnosticWarn guifg=#fb9900
+hi DiagnosticUnderlineWarn guisp=#fb9900
+
+hi DiagnosticInfo guifg=#4ba2ff
+hi DiagnosticUnderlineInfo guisp=#4ba2ff
+
+hi DiagnosticHint guifg=#c853ff
+hi DiagnosticUnderlineHint guisp=#c853ff
 
 hi! link diffLine special
 hi! link diffAdded function
