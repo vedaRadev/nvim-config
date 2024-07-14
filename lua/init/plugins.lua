@@ -1,44 +1,74 @@
-require('packer').startup(function()
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
-    -- TODO set up these plugins
-    -- use 'jbyuki/venn.nvim' -- ascii diagrams
+require('lazy').setup({
+    -- colorschemes/themes
+    'ayu-theme/ayu-vim',
+    'kadekillary/Turtles',
+    'tyrannicaltoucan/vim-deep-space',
+    'folke/tokyonight.nvim',
+    { 'pineapplegiant/spaceduck', branch = 'main' },
+    'tiagovla/tokyodark.nvim',
+    'chase/focuspoint-vim',
+    'NLKNguyen/papercolor-theme',
+    'christophermca/meta5',
+    'TheNiteCoder/mountaineer.vim',
+    'fcpg/vim-orbital',
+    'jaredgorski/SpaceCamp',
+    'tomasr/molokai',
+    'srcery-colors/srcery-vim',
+    'fenetikm/falcon',
+    'AlessandroYorba/Alduin',
+    'stankovictab/mgz.nvim',
+    'Aryansh-S/fastdark.vim',
+    'gtr/rza',
 
-    use 'wbthomason/packer.nvim'
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-surround'
-    use 'tpope/vim-repeat'
-    use 'tpope/vim-commentary'
-    use 't9md/vim-choosewin'
-    use 'andrewradev/splitjoin.vim'
-    use 'junegunn/goyo.vim'
-    use 'junegunn/vim-peekaboo'
-    use 'godlygeek/tabular'
-    use 'scrooloose/nerdtree'
-    use 'norcalli/nvim-colorizer.lua'
-    use {
+    -- plugins
+    'tpope/vim-fugitive',
+    'tpope/vim-surround',
+    'tpope/vim-repeat',
+    'tpope/vim-commentary',
+    't9md/vim-choosewin',
+    'andrewradev/splitjoin.vim',
+    'junegunn/goyo.vim',
+    'junegunn/vim-peekaboo',
+    'godlygeek/tabular',
+    'scrooloose/nerdtree',
+    'norcalli/nvim-colorizer.lua',
+    {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig'
-    }
+    },
 
-    use {
+    {
         "folke/trouble.nvim",
-        requires = "nvim-tree/nvim-web-devicons",
+        dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
             require("trouble").setup {}
         end
-    }
+    },
 
-    use {
+    {
         'iamcco/markdown-preview.nvim',
-        run = function()
+        build = function()
             vim.fn['mkdp#util#install']()
         end,
-    }
+    },
 
-    use {
+    {
         'hrsh7th/nvim-cmp',
-        requires = {
+        dependencies = {
             'hrsh7th/cmp-nvim-lua',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
@@ -48,48 +78,37 @@ require('packer').startup(function()
             'dcampos/nvim-snippy',
             'dcampos/cmp-snippy',
         },
-    }
+    },
 
-    -- use { 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons' }
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ":TSUpdate",
+        config = function()
+            local configs = require("nvim-treesitter.configs")
 
-    -- colorschemes/themes
-    use 'ayu-theme/ayu-vim'
-    use 'kadekillary/Turtles'
-    use 'tyrannicaltoucan/vim-deep-space'
-    use 'folke/tokyonight.nvim'
-    use { 'pineapplegiant/spaceduck', branch = 'main' }
-    use 'tiagovla/tokyodark.nvim'
-    use 'chase/focuspoint-vim'
-    use 'NLKNguyen/papercolor-theme'
-    use 'christophermca/meta5'
-    use 'TheNiteCoder/mountaineer.vim'
-    use 'fcpg/vim-orbital'
-    use 'jaredgorski/SpaceCamp'
-    use 'tomasr/molokai'
-    use 'srcery-colors/srcery-vim'
-    use 'fenetikm/falcon'
-    use 'AlessandroYorba/Alduin'
-    use 'stankovictab/mgz.nvim'
-    use 'Aryansh-S/fastdark.vim'
-    use 'gtr/rza'
+            configs.setup({
+                ensure_installed = { "c", "rust", "lua" },
+                sync_install = false,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end
+    },
 
-    -- stuff requiring extra options
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-
-    use {
+    {
         'nvim-telescope/telescope.nvim',
-        requires = {
+        dependencies = {
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
         }
-    }
+    },
 
-    use {
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
+        dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+    },
 
-end)
+})
 
 -- require('bufferline').setup{
 --     options = {
@@ -163,15 +182,15 @@ require('lualine').setup{
     }
 }
 
-require('nvim-treesitter.configs').setup {
-    ensure_installed = 'all',
+-- require('nvim-treesitter.configs').setup {
+--     ensure_installed = 'all',
 
-    -- install parsers asynchronously
-    sync_install = true,
+--     -- install parsers asynchronously
+--     sync_install = true,
 
-    highlight = { enable = true },
-    indent = { enable = true },
-}
+--     highlight = { enable = true },
+--     indent = { enable = true },
+-- }
 
 local cmp = require('cmp')
 cmp.setup {
