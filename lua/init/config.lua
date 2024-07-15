@@ -1,5 +1,11 @@
 vim.opt.syntax          = 'off'
-vim.opt.fileformats     = { 'unix' }
+
+if (vim.fn.has('win32') == 1) then
+    vim.opt.fileformats = { 'dos' }
+else
+    vim.opt.fileformats = { 'unix' }
+end
+
 vim.opt.number          = true
 vim.opt.relativenumber  = true
 vim.opt.expandtab       = true
