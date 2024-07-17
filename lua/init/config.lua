@@ -43,7 +43,7 @@ hi boolean guifg=peachpuff
 hi character guifg=peachpuff
 hi macro guifg=#c853ff
 hi string guifg=peachpuff guibg=#262626
-hi storageclass gui=italic guifg=#ff7900
+hi storageclass guifg=#ec1f1f gui=none
 hi comment guifg=#707070
 hi operator guifg=peachpuff
 hi delimiter guifg=peachpuff
@@ -77,6 +77,7 @@ hi DiagnosticUnderlineInfo guisp=#4ba2ff
 hi DiagnosticHint guifg=#c853ff
 hi DiagnosticUnderlineHint guisp=#c853ff
 
+"kind of a bastardization of what hi! link is for I guess
 hi! link diffLine special
 hi! link diffAdded function
 hi! link diffRemoved keyword
