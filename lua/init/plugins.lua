@@ -90,7 +90,7 @@ require('lazy').setup({
                 ensure_installed = { "c", "rust", "lua" },
                 sync_install = false,
                 highlight = { enable = true },
-                indent = { enable = true },
+                indent = { enable = false },
             })
         end
     },
@@ -111,16 +111,13 @@ require('lazy').setup({
         dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
     },
 
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^5',
+        lazy = false, -- plugin already lazy
+    },
 })
 
--- require('bufferline').setup{
---     options = {
---         mode = 'tabs',
---         diagnostics = 'nvim_lsp'
---     }
--- }
-
---require('lualine').setup(require('lualine.evil-lualine'))
 local function get_active_lsp()
     local msg = 'No Active Lsp'
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -144,7 +141,7 @@ end
 
 require('lualine').setup{
     options = {
-        theme = '16color',
+        theme = 'powerline_dark',
         icons_enabled = false,
         component_separators = { left = '|', right = '|' },
         section_separators = { left = '', right = '' },
@@ -184,16 +181,6 @@ require('lualine').setup{
         lualine_z = {},
     }
 }
-
--- require('nvim-treesitter.configs').setup {
---     ensure_installed = 'all',
-
---     -- install parsers asynchronously
---     sync_install = true,
-
---     highlight = { enable = true },
---     indent = { enable = true },
--- }
 
 local cmp = require('cmp')
 cmp.setup {
@@ -274,19 +261,21 @@ lspconfig.bashls.setup({})
 -- lspconfig.sqlls.setup({})
 lspconfig.gdscript.setup({})
 -- lspconfig.csharp_ls.setup({})
-lspconfig.rust_analyzer.setup({
-    settings = {
-        ['rust-analyzer'] = {
-            checkOnSave = {
-                allFeatures = true,
-                overrideCommand = {
-                    'cargo', 'clippy', '--workspace', '--message-format=json',
-                    '--all-targets', '--all-features'
-                }
-            }
-        }
-    }
-})
+
+-- -- DO NOT CALL RUST-ANALZYER SETUP MANUALLY WHEN USING RUSTACEANVIM
+-- lspconfig.rust_analyzer.setup({
+--     settings = {
+--         ['rust-analyzer'] = {
+--             checkOnSave = {
+--                 allFeatures = true,
+--                 overrideCommand = {
+--                     'cargo', 'clippy', '--workspace', '--message-format=json',
+--                     '--all-targets', '--all-features'
+--                 }
+--             }
+--         }
+--     }
+-- })
 
 vim.g['choosewin_overlay_enable'] = 1
 

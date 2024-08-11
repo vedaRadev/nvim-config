@@ -31,12 +31,11 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
-"hi normal guifg=peachpuff guibg=#041004
-"hi normalfloat guibg=#060606
 hi normal guifg=peachpuff guibg=#060606
 hi normalfloat guibg=#041004
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
+hi constant guifg=peachpuff
 hi number guifg=peachpuff
 hi float guifg=peachpuff
 hi boolean guifg=peachpuff
@@ -81,6 +80,9 @@ hi! link diffLine special
 hi! link diffAdded function
 hi! link diffRemoved keyword
 hi! link @function.macro macro
+hi! link @lsp.type.macro macro
+hi! link @lsp.type.enummember clear
+hi! link @lsp.typemod.variable.callable function
 
 hi spellbad guifg=#ec1f1f
 
@@ -90,8 +92,6 @@ hi @comment.todo.comment guifg=black guibg=#fb9900
 hi @comment.warn.comment guifg=black guibg=#fb9900
 hi @comment.note.comment guifg=black guibg=#4ba2ff
 hi @comment.error.comment guifg=black guibg=#ec1f1f
-
-hi clear constant
 ]])
 
 -- vim.cmd([[
