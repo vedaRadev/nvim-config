@@ -81,6 +81,7 @@ hi! link diffLine special
 hi! link diffAdded function
 hi! link diffRemoved keyword
 hi! link @function.macro macro
+hi! link @lsp.type.procmacro macro
 hi! link @lsp.type.macro macro
 hi! link @lsp.type.enummember clear
 hi! link @lsp.typemod.variable.callable function
