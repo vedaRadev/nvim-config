@@ -44,6 +44,7 @@ require('lazy').setup({
     'junegunn/vim-peekaboo',
     'godlygeek/tabular',
     'scrooloose/nerdtree',
+    'tpope/vim-abolish',
     'norcalli/nvim-colorizer.lua',
     {
         'williamboman/mason.nvim',
@@ -252,18 +253,21 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 
 require('mason').setup()
 require('mason-lspconfig').setup()
-lspconfig.tsserver.setup({})
-lspconfig.cssls.setup({})
-lspconfig.eslint.setup({})
+lspconfig.asm_lsp.setup({
+    filetypes = { "asm", "nasm" }
+})
+-- lspconfig.ts_ls.setup({})
+-- lspconfig.cssls.setup({})
+-- lspconfig.eslint.setup({})
 -- lspconfig.lua_ls.setup({})
-lspconfig.html.setup({})
+-- lspconfig.html.setup({})
 lspconfig.clangd.setup({})
-lspconfig.jsonls.setup({})
-lspconfig.yamlls.setup({})
-lspconfig.bashls.setup({})
+-- lspconfig.jsonls.setup({})
+-- lspconfig.yamlls.setup({})
+-- lspconfig.bashls.setup({})
 -- lspconfig.groovyls.setup({})
 -- lspconfig.sqlls.setup({})
-lspconfig.gdscript.setup({})
+-- lspconfig.gdscript.setup({})
 -- lspconfig.csharp_ls.setup({})
 
 -- -- DO NOT CALL RUST-ANALZYER SETUP MANUALLY WHEN USING RUSTACEANVIM

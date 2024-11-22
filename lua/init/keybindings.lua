@@ -9,15 +9,18 @@ function vmap(shortcut, command) map('v', shortcut, command) end
 
 vim.g.mapleader = ' '
 
+nmap('<f1>', ':set rnu!<cr>')
+nmap('<f2>', ':set hlsearch!<cr>:set hlsearch?<cr>')
+nmap('<f3>', ':set spell!<cr>')
+nmap('<f4>', ':set cursorline!<cr>')
+nmap('<f5>', ':set wrap!<cr>')
+
 nmap('<up>', '<nop>')
 nmap('<right>', '<nop>')
 nmap('<left>', '<nop>')
 nmap('<down>', '<nop>')
 nmap('<space>', '<nop>')
 nmap('<bs>', '<nop>')
-nmap('<f1>', ':set rnu!<cr>')
-nmap('<f2>', ':set hlsearch!<cr>:set hlsearch?<cr>')
-nmap('<f3>', ':set spell!<cr>')
 nmap('_', '<c-w>_')
 nmap('<c-=>', '<c-w>=')
 nmap('<leader>=', '<c-w>=')
@@ -34,24 +37,6 @@ nmap('<leader>lg', ':Telescope live_grep<cr>')
 nmap('<leader>lr', ':Telescope lsp_references<cr>')
 nmap('<leader>tt', ':Trouble diagnostics toggle<cr>')
 
--- vim.cmd([[
--- function! ShowDocumentation()
---   if CocAction('hasProvider', 'hover')
---     call CocActionAsync('doHover')
---   else
---     call feedkeys('K', 'in')
---   endif
--- endfunction
--- ]])
-
--- nmap('K', ':call ShowDocumentation()<cr>')
--- nmap('<leader>rn', '<Plug>(coc-rename)')
--- nmap('gd', '<Plug>(coc-definition)')
--- nmap('gy', '<Plug>(coc-type-definition)')
--- nmap('gr', '<Plug>(coc-reference)')
--- nmap('<leader>gi', '<Plug>(coc-implementation)')
--- nmap('<leader>ca', ':CocAction<cr>')
-
 nmap('K', ':lua vim.lsp.buf.hover()<cr>')
 nmap('<c-k>', ':lua vim.lsp.buf.signature_help()<cr>')
 nmap('<leader>gd', ':lua vim.lsp.buf.declaration()<cr>')
@@ -61,6 +46,9 @@ nmap('<leader>gr', ':lua vim.lsp.buf.references()<cr>')
 nmap('<leader>gt', ':lua vim.lsp.buf.type_definition()<cr>')
 nmap('<leader>ca', ':lua vim.lsp.buf.code_action()<cr>')
 nmap('<leader>rn', ':lua vim.lsp.buf.rename()<cr>')
+nmap('<leader>d[', ':lua vim.diagnostic.goto_prev()<cr>')
+nmap('<leader>d]', ':lua vim.diagnostic.goto_next()<cr>')
+nmap('<leader>dd', ':lua vim.diagnostic.open_float()<cr>');
 
 imap('<Up>', '<nop>')
 imap('<Right>', '<nop>')

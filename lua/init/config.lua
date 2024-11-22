@@ -1,11 +1,10 @@
-vim.opt.syntax          = 'off'
-
 if (vim.fn.has('win32') == 1) then
     vim.opt.fileformats = { 'dos' }
 else
     vim.opt.fileformats = { 'unix' }
 end
 
+vim.opt.syntax          = 'off'
 vim.opt.number          = true
 vim.opt.relativenumber  = true
 vim.opt.expandtab       = true
@@ -13,7 +12,7 @@ vim.opt.tabstop         = 4
 vim.opt.shiftwidth      = 0
 vim.opt.softtabstop     = 4
 vim.opt.textwidth       = 100
-vim.opt.wrap			= true
+vim.opt.wrap			= false
 vim.opt.linebreak		= true
 vim.opt.breakindent	    = true
 vim.opt.hlsearch		= false
@@ -23,6 +22,7 @@ vim.opt.signcolumn      = 'yes'
 vim.opt.backup          = false
 vim.opt.cmdheight       = 1
 vim.opt.updatetime      = 300
+vim.opt.cursorline      = true
 
 vim.opt.shortmess:append('c')
 
@@ -35,6 +35,7 @@ hi normal guifg=peachpuff guibg=#060606
 hi normalfloat guibg=#041004
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
+hi cursorline guibg=#042004
 hi constant guifg=peachpuff
 hi number guifg=peachpuff
 hi float guifg=peachpuff
@@ -88,9 +89,12 @@ hi! link @lsp.typemod.variable.callable function
 
 hi spellbad guifg=#ec1f1f
 
+hi todo guifg=black guibg=#fb9900
+hi! link @comment.todo.comment todo
+
 hi @string.yaml guibg=background
 hi @variable guifg=peachpuff
-hi @comment.todo.comment guifg=black guibg=#fb9900
+"hi @comment.todo.comment guifg=black guibg=#fb9900
 hi @comment.warn.comment guifg=black guibg=#fb9900
 hi @comment.note.comment guifg=black guibg=#4ba2ff
 hi @comment.error.comment guifg=black guibg=#ec1f1f
@@ -110,9 +114,10 @@ hi @comment.error.comment guifg=black guibg=#ec1f1f
 vim.cmd([[
 augroup CursorLine
 au!
-au VimEnter,ColorScheme * set cursorline
-au VimEnter,ColorScheme * hi clear cursorline
-au VimEnter,ColorScheme * hi cursorlinenr guibg=background
+au WinEnter * setlocal cursorline
+au BufWinEnter * setlocal cursorline
+au WinLeave * setlocal nocursorline
+au BufWinLeave * setlocal nocursorline
 augroup END
 
 augroup Formatting
