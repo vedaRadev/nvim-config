@@ -131,7 +131,11 @@ require('lazy').setup({
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "c", "rust", "lua", "vim", "cpp", "comment" },
+                ensure_installed = {
+                    "c", "rust", "lua", "vim", "cpp",
+                    "comment", "toml", "yaml", "json",
+                    "javascript", "typescript", "html"
+                },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = false },
@@ -256,19 +260,25 @@ require('mason-lspconfig').setup()
 lspconfig.asm_lsp.setup({
     filetypes = { "asm", "nasm" }
 })
--- lspconfig.ts_ls.setup({})
--- lspconfig.cssls.setup({})
--- lspconfig.eslint.setup({})
--- lspconfig.lua_ls.setup({})
--- lspconfig.html.setup({})
+
+-- TODO Find a way to only run the setups on lsps that are installed.
+-- Will have to look more into lua to do this.
+-- Maybe can just iterate over the key/val pairs in the lspconfig var and run setup() on each of
+-- them?
+-- Do I even need to call setup() on them anymore?
+lspconfig.ts_ls.setup({})
+lspconfig.cssls.setup({})
+lspconfig.eslint.setup({})
+lspconfig.lua_ls.setup({})
+lspconfig.html.setup({})
 lspconfig.clangd.setup({})
--- lspconfig.jsonls.setup({})
--- lspconfig.yamlls.setup({})
--- lspconfig.bashls.setup({})
--- lspconfig.groovyls.setup({})
--- lspconfig.sqlls.setup({})
--- lspconfig.gdscript.setup({})
--- lspconfig.csharp_ls.setup({})
+lspconfig.jsonls.setup({})
+lspconfig.yamlls.setup({})
+lspconfig.bashls.setup({})
+lspconfig.groovyls.setup({})
+lspconfig.sqlls.setup({})
+lspconfig.gdscript.setup({})
+lspconfig.csharp_ls.setup({})
 
 -- -- DO NOT CALL RUST-ANALZYER SETUP MANUALLY WHEN USING RUSTACEANVIM
 -- lspconfig.rust_analyzer.setup({

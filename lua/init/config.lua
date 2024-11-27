@@ -32,10 +32,12 @@ vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
 hi normal guifg=peachpuff guibg=#060606
-hi normalfloat guibg=#041004
+hi normalfloat guibg=#062606
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
-hi cursorline guibg=#042004
+hi cursorline guibg=#400000
+"hi visual guifg=black guibg=#707070
+hi visual guifg=clear guibg=#400000
 hi constant guifg=peachpuff
 hi number guifg=peachpuff
 hi float guifg=peachpuff
@@ -63,7 +65,7 @@ hi conditional guifg=#ec1f1f
 hi repeat guifg=#ec1f1f
 hi specialchar guifg=#4ba2ff
 hi exception guifg=#ec1f1f
-hi visual guifg=black guibg=#707070
+
 
 hi DiagnosticError guifg=#ec1f1f
 hi DiagnosticUnderlineError guisp=#ec1f1f
@@ -98,6 +100,8 @@ hi @variable guifg=peachpuff
 hi @comment.warn.comment guifg=black guibg=#fb9900
 hi @comment.note.comment guifg=black guibg=#4ba2ff
 hi @comment.error.comment guifg=black guibg=#ec1f1f
+" Color taken from highlight category "special"
+hi @string.special.url.comment gui=underline guifg=#4ba2ff guibg=clear
 ]])
 
 -- vim.cmd([[
@@ -115,9 +119,9 @@ vim.cmd([[
 augroup CursorLine
 au!
 au WinEnter * setlocal cursorline
-au BufWinEnter * setlocal cursorline
+"au BufWinEnter * setlocal cursorline
 au WinLeave * setlocal nocursorline
-au BufWinLeave * setlocal nocursorline
+"au BufWinLeave * setlocal nocursorline
 augroup END
 
 augroup Formatting
