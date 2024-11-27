@@ -31,27 +31,27 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
-hi normal guifg=peachpuff guibg=#060606
+hi normal guifg=#ede6d6 guibg=#060606
 hi normalfloat guibg=#062606
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
 hi cursorline guibg=#400000
 "hi visual guifg=black guibg=#707070
 hi visual guifg=clear guibg=#400000
-hi constant guifg=peachpuff
-hi number guifg=peachpuff
-hi float guifg=peachpuff
-hi boolean guifg=peachpuff
-hi character guifg=peachpuff
+hi constant guifg=#ede6d6
+hi number guifg=#ede6d6
+hi float guifg=#ede6d6
+hi boolean guifg=#ede6d6
+hi character guifg=#ede6d6
 hi macro guifg=#c853ff
-hi string guifg=peachpuff guibg=#262626
+hi string guifg=#ede6d6 guibg=#262626
 hi storageclass guifg=#ec1f1f gui=none
 hi comment guifg=#707070
-hi operator guifg=peachpuff
-hi delimiter guifg=peachpuff
+hi operator guifg=#ede6d6
+hi delimiter guifg=#ede6d6
 hi function guifg=#7ca900
-hi identifier guifg=peachpuff
-hi statement guifg=peachpuff
+hi identifier guifg=#ede6d6
+hi statement guifg=#ede6d6
 hi structure guifg=#fb9900
 hi type guifg=#fb9900
 hi include guifg=#c853ff
@@ -95,7 +95,7 @@ hi todo guifg=black guibg=#fb9900
 hi! link @comment.todo.comment todo
 
 hi @string.yaml guibg=background
-hi @variable guifg=peachpuff
+hi @variable guifg=#ede6d6
 "hi @comment.todo.comment guifg=black guibg=#fb9900
 hi @comment.warn.comment guifg=black guibg=#fb9900
 hi @comment.note.comment guifg=black guibg=#4ba2ff
