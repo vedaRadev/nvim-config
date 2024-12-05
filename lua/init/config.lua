@@ -45,6 +45,7 @@ hi boolean guifg=#d3d7cf
 hi character guifg=#d3d7cf
 hi macro guifg=#c853ff
 hi string guifg=#d3d7cf guibg=#262626
+hi character guifg=#d3d7cf guibg=#262626
 hi storageclass guifg=#ec1f1f gui=none
 hi comment guifg=#707070
 hi operator guifg=#d3d7cf
@@ -78,6 +79,8 @@ hi DiagnosticUnderlineInfo guisp=#4ba2ff
 
 hi DiagnosticHint guifg=#c853ff
 hi DiagnosticUnderlineHint guisp=#c853ff
+
+hi DiagnosticOk guifg=#7ca900
 
 "kind of a bastardization of what hi! link is for I guess
 hi! link diffLine special
