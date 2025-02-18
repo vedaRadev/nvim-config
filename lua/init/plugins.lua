@@ -131,13 +131,12 @@ require('lazy').setup({
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = {
-                    "c", "rust", "lua", "vim", "cpp",
-                    "comment", "toml", "yaml", "json",
-                    "javascript", "typescript", "html"
-                },
+                ensure_installed = { "lua", "vim", "comment" },
                 sync_install = false,
-                highlight = { enable = true },
+                highlight = {
+                    enable = true,
+                    disable = { "toml", "yaml" }
+                },
                 indent = { enable = false },
             })
         end
@@ -279,6 +278,9 @@ lspconfig.groovyls.setup({})
 lspconfig.sqlls.setup({})
 lspconfig.gdscript.setup({})
 lspconfig.csharp_ls.setup({})
+lspconfig.pyright.setup({})
+lspconfig.marksman.setup({})
+lspconfig.gopls.setup({})
 
 -- -- DO NOT CALL RUST-ANALZYER SETUP MANUALLY WHEN USING RUSTACEANVIM
 -- lspconfig.rust_analyzer.setup({
