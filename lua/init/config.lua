@@ -31,11 +31,12 @@ vim.cmd[[command! Q q]]
 vim.cmd[[command! Qa qa]]
 
 vim.cmd([[
-hi normal guifg=#d3d7cf guibg=#060606
-hi normalfloat guibg=#062606
+"hi normal guifg=#d3d7cf guibg=#060606
+hi normal guifg=#d3d7cf guibg=black
+hi normalfloat guibg=#062006
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
-hi cursorline guibg=#400000
+hi cursorline guibg=#380000
 "hi visual guifg=black guibg=#707070
 hi visual guifg=clear guibg=#400000
 hi constant guifg=#d3d7cf
