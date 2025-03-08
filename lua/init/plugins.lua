@@ -12,40 +12,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-    -- colorschemes/themes
-    'ayu-theme/ayu-vim',
-    'kadekillary/Turtles',
-    'tyrannicaltoucan/vim-deep-space',
-    'folke/tokyonight.nvim',
-    { 'pineapplegiant/spaceduck', branch = 'main' },
-    'tiagovla/tokyodark.nvim',
-    'chase/focuspoint-vim',
-    'NLKNguyen/papercolor-theme',
-    'christophermca/meta5',
-    'TheNiteCoder/mountaineer.vim',
-    'fcpg/vim-orbital',
-    'jaredgorski/SpaceCamp',
-    'tomasr/molokai',
-    'srcery-colors/srcery-vim',
-    'fenetikm/falcon',
-    'AlessandroYorba/Alduin',
-    'stankovictab/mgz.nvim',
-    'Aryansh-S/fastdark.vim',
-    'gtr/rza',
-
-    -- plugins
     'tpope/vim-fugitive',
     'tpope/vim-surround',
     'tpope/vim-repeat',
     'tpope/vim-commentary',
-    't9md/vim-choosewin',
     'andrewradev/splitjoin.vim',
-    'junegunn/goyo.vim',
-    'junegunn/vim-peekaboo',
     'godlygeek/tabular',
     'scrooloose/nerdtree',
     'tpope/vim-abolish',
-    'norcalli/nvim-colorizer.lua',
     {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
@@ -247,61 +221,51 @@ local lsp_defaults = {
     end
 }
 
-local lspconfig = require('lspconfig')
-lspconfig.util.default_config = vim.tbl_deep_extend(
+require('lspconfig').util.default_config = vim.tbl_deep_extend(
     'force',
-    lspconfig.util.default_config,
+    require('lspconfig').util.default_config,
     lsp_defaults
 )
 
 require('mason').setup()
 require('mason-lspconfig').setup()
-lspconfig.asm_lsp.setup({
-    filetypes = { "asm", "nasm" }
+require('mason-lspconfig').setup_handlers({
+    -- default handlers
+    function(server_name)
+        require('lspconfig')[server_name].setup({})
+    end,
+
+    ['asm_lsp'] = function()
+        require('lspconfig').asm_lsp.setup({
+            filetype = { 'asm', 'nasm' }
+        })
+    end,
 })
 
--- TODO Find a way to only run the setups on lsps that are installed.
--- Will have to look more into lua to do this.
--- Maybe can just iterate over the key/val pairs in the lspconfig var and run setup() on each of
--- them?
--- Do I even need to call setup() on them anymore?
-lspconfig.ts_ls.setup({})
-lspconfig.cssls.setup({})
-lspconfig.eslint.setup({})
-lspconfig.lua_ls.setup({})
-lspconfig.html.setup({})
-lspconfig.clangd.setup({})
-lspconfig.jsonls.setup({})
-lspconfig.yamlls.setup({})
-lspconfig.bashls.setup({})
-lspconfig.groovyls.setup({})
-lspconfig.sqlls.setup({})
-lspconfig.gdscript.setup({})
-lspconfig.csharp_ls.setup({})
-lspconfig.pyright.setup({})
-lspconfig.marksman.setup({})
-lspconfig.gopls.setup({})
-
--- -- DO NOT CALL RUST-ANALZYER SETUP MANUALLY WHEN USING RUSTACEANVIM
--- lspconfig.rust_analyzer.setup({
---     settings = {
---         ['rust-analyzer'] = {
---             checkOnSave = {
---                 allFeatures = true,
---                 overrideCommand = {
---                     'cargo', 'clippy', '--workspace', '--message-format=json',
---                     '--all-targets', '--all-features'
---                 }
---             }
---         }
---     }
--- })
+-- -- TODO Find a way to only run the setups on lsps that are installed.
+-- -- Will have to look more into lua to do this.
+-- -- Maybe can just iterate over the key/val pairs in the lspconfig var and run setup() on each of
+-- -- them?
+-- -- Do I even need to call setup() on them anymore?
+-- lspconfig.ts_ls.setup({})
+-- lspconfig.cssls.setup({})
+-- lspconfig.eslint.setup({})
+-- lspconfig.lua_ls.setup({})
+-- lspconfig.html.setup({})
+-- lspconfig.clangd.setup({})
+-- lspconfig.jsonls.setup({})
+-- lspconfig.yamlls.setup({})
+-- lspconfig.bashls.setup({})
+-- lspconfig.groovyls.setup({})
+-- lspconfig.sqlls.setup({})
+-- lspconfig.gdscript.setup({})
+-- lspconfig.csharp_ls.setup({})
+-- lspconfig.pyright.setup({})
+-- lspconfig.marksman.setup({})
+-- lspconfig.gopls.setup({})
 
 vim.g['choosewin_overlay_enable'] = 1
 
 vim.g['NERDTreeAutoCenter'] = 0
-
-vim.g['peekaboo_window'] = 'vert bo 50new'
-vim.g['peekaboo_delay'] = 500
 
 vim.cmd[[ au FileType c,cpp,cs setlocal commentstring=//%s ]]
