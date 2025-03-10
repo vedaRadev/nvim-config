@@ -242,28 +242,6 @@ require('mason-lspconfig').setup_handlers({
     end,
 })
 
--- -- TODO Find a way to only run the setups on lsps that are installed.
--- -- Will have to look more into lua to do this.
--- -- Maybe can just iterate over the key/val pairs in the lspconfig var and run setup() on each of
--- -- them?
--- -- Do I even need to call setup() on them anymore?
--- lspconfig.ts_ls.setup({})
--- lspconfig.cssls.setup({})
--- lspconfig.eslint.setup({})
--- lspconfig.lua_ls.setup({})
--- lspconfig.html.setup({})
--- lspconfig.clangd.setup({})
--- lspconfig.jsonls.setup({})
--- lspconfig.yamlls.setup({})
--- lspconfig.bashls.setup({})
--- lspconfig.groovyls.setup({})
--- lspconfig.sqlls.setup({})
--- lspconfig.gdscript.setup({})
--- lspconfig.csharp_ls.setup({})
--- lspconfig.pyright.setup({})
--- lspconfig.marksman.setup({})
--- lspconfig.gopls.setup({})
-
 vim.g['choosewin_overlay_enable'] = 1
 
 vim.g['NERDTreeAutoCenter'] = 0
