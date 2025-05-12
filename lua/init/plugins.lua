@@ -109,7 +109,7 @@ require('lazy').setup({
                 sync_install = false,
                 highlight = {
                     enable = true,
-                    disable = { "toml", "yaml" }
+                    disable = { "toml", "yaml" },
                 },
                 indent = { enable = false },
             })
@@ -218,6 +218,7 @@ local lsp_defaults = {
     ),
     on_attach = function(client, buffer_number)
         vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+        client.server_capabilities.semanticTokensProvider = nil
     end
 }
 
@@ -229,17 +230,9 @@ require('lspconfig').util.default_config = vim.tbl_deep_extend(
 
 require('mason').setup()
 require('mason-lspconfig').setup()
-require('mason-lspconfig').setup_handlers({
-    -- default handlers
-    function(server_name)
-        require('lspconfig')[server_name].setup({})
-    end,
 
-    ['asm_lsp'] = function()
-        require('lspconfig').asm_lsp.setup({
-            filetype = { 'asm', 'nasm' }
-        })
-    end,
+vim.lsp.config('asm_lsp', {
+    filetype = { 'asm', 'nasm' }
 })
 
 vim.g['choosewin_overlay_enable'] = 1
