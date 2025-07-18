@@ -101,19 +101,8 @@ require('lazy').setup({
     {
         'nvim-treesitter/nvim-treesitter',
         build = ":TSUpdate",
-        config = function()
-            local configs = require("nvim-treesitter.configs")
-
-            configs.setup({
-                ensure_installed = { "lua", "vim", "comment" },
-                sync_install = false,
-                highlight = {
-                    enable = true,
-                    disable = { "toml", "yaml" },
-                },
-                indent = { enable = false },
-            })
-        end
+        branch = "main",
+        lazy = false,
     },
 
     {
