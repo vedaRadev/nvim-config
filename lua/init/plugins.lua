@@ -197,6 +197,16 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     { update_in_insert = false }
 )
 
+-- start treesitter highlighting automatically when filetype is recognized
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { '*' },
+    callback = function()
+        -- FIXME find a better way to do this
+        -- maybe there's a way to check if we have a parser installed before trying to start it
+        pcall(vim.treesitter.start)
+    end,
+})
+
 -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 local lsp_defaults = {
     flags = {
