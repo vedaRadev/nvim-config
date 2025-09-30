@@ -20,6 +20,14 @@ require('lazy').setup({
     'godlygeek/tabular',
     'scrooloose/nerdtree',
     'tpope/vim-abolish',
+
+    {
+        'machakann/vim-highlightedyank',
+        config = function()
+            vim.g['highlightedyank_highlight_duration'] = 350
+        end
+    },
+
     {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
@@ -35,10 +43,13 @@ require('lazy').setup({
     },
 
     {
-        'iamcco/markdown-preview.nvim',
-        build = function()
-            vim.fn['mkdp#util#install']()
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
         end,
+        ft = { "markdown" },
     },
 
     {
