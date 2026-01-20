@@ -60,7 +60,6 @@ require('lazy').setup({
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
-            'octaltree/cmp-look',
             'dcampos/nvim-snippy',
             'dcampos/cmp-snippy',
         },
@@ -76,8 +75,7 @@ require('lazy').setup({
                     end
                 },
                 window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
+                    -- TODO(ryan): customization if desired
                 },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-f'] = cmp.mapping.scroll_docs(-4),

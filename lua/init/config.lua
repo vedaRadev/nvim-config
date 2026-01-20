@@ -34,6 +34,7 @@ vim.cmd([[
 "hi normal guifg=#d3d7cf guibg=#060606
 hi normal guifg=#d3d7cf guibg=black
 hi normalfloat guibg=#062006
+hi Pmenu guibg=#062006
 hi linenr guifg=dimgray
 hi cursorlinenr guifg=#fb9900
 hi cursorline guibg=#380000
