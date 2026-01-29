@@ -7,10 +7,10 @@ end
 vim.opt.syntax          = 'off'
 vim.opt.number          = true
 vim.opt.relativenumber  = true
-vim.opt.expandtab       = true
+vim.opt.expandtab       = false
 vim.opt.tabstop         = 4
 vim.opt.shiftwidth      = 0
-vim.opt.softtabstop     = 4
+vim.opt.softtabstop     = 0
 vim.opt.textwidth       = 100
 vim.opt.wrap			= false
 vim.opt.linebreak		= true
@@ -23,6 +23,9 @@ vim.opt.backup          = false
 vim.opt.cmdheight       = 1
 vim.opt.updatetime      = 300
 vim.opt.cursorline      = true
+
+-- c indentation
+vim.opt.cinoptions = "(0,Ws,m1"
 
 vim.opt.shortmess:append('c')
 

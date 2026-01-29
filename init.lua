@@ -25,6 +25,6 @@ if (vim.fn.has('wsl') == 1) then
 	}
 end
 
-require('init.config')
 require('init.keybindings')
 require('init.plugins')
+require('init.config')
