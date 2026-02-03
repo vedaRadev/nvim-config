@@ -1,7 +1,7 @@
 if (vim.fn.has('win32') == 1) then
-    vim.opt.fileformats = { 'dos' }
+	vim.opt.fileformats = { 'dos' }
 else
-    vim.opt.fileformats = { 'unix' }
+	vim.opt.fileformats = { 'unix' }
 end
 
 vim.opt.syntax          = 'off'
@@ -23,6 +23,7 @@ vim.opt.backup          = false
 vim.opt.cmdheight       = 1
 vim.opt.updatetime      = 300
 vim.opt.cursorline      = true
+vim.opt.autoindent		= true
 
 -- c indentation
 vim.opt.cinoptions = "(0,Ws,m1"
@@ -111,15 +112,6 @@ hi @comment.error.comment guifg=black guibg=#ec1f1f
 " Color taken from highlight category "special"
 hi @string.special.url.comment gui=underline guifg=#4ba2ff guibg=clear
 ]])
-
--- vim.cmd([[
--- let g:alduin_Shout_Fire_Breath=0 "1 = deep red for special highlight groups
--- let g:alduin_Shout_Aura_Whisper=0 "1 = remove block matchparens and add underline
--- let g:alduin_Shout_Dragon_Aspect=0 "1 = almost black background
--- let g:alduin_Shout_Become_Ethereal=1 "1 = black background
--- let g:alduin_Shout_Animal_Allegiance=0 "1 = remove string bg
--- color alduin
--- ]])
 
 -- TODO move augroups and autocommands to pure lua
 -- https://gist.github.com/numToStr/1ab83dd2e919de9235f9f774ef8076da
