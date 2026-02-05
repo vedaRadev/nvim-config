@@ -20,6 +20,9 @@ require('lazy').setup({
 	'godlygeek/tabular',
 	'scrooloose/nerdtree',
 	'tpope/vim-abolish',
+	'williamboman/mason.nvim',
+	'williamboman/mason-lspconfig.nvim',
+	'neovim/nvim-lspconfig',
 
 	{
 		'machakann/vim-highlightedyank',
@@ -29,9 +32,16 @@ require('lazy').setup({
 	},
 
 	{
-		'williamboman/mason.nvim',
-		'williamboman/mason-lspconfig.nvim',
-		'neovim/nvim-lspconfig'
+		'nvim-mini/mini.align',
+		version = false,
+		config = function()
+			require("mini.align").setup {
+				mappings = {
+					start = ' a',
+					start_with_preview = ' A',
+				}
+			}
+		end
 	},
 
 	{
