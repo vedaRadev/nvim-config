@@ -24,6 +24,23 @@ require('lazy').setup({
 	'williamboman/mason-lspconfig.nvim',
 	'neovim/nvim-lspconfig',
 
+	-- LuaLS autosetup
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			-- Load luvit types when vim.uv word is found
+			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+		}
+	},
+
+	{
+		'mbbill/undotree',
+		config = function()
+			vim.keymap.set('n', '<leader>ut', vim.cmd.UndotreeToggle)
+		end
+	},
+
 	{
 		'machakann/vim-highlightedyank',
 		config = function()
@@ -142,14 +159,14 @@ require('lazy').setup({
 
 	{
 		'mrcjkb/rustaceanvim',
-		version = '^5',
+		version = '^8',
 		lazy = false, -- plugin already lazy
 	},
 })
 
 local function get_active_lsp()
 	local msg = 'No Active Lsp'
-	local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+	local buf_ft = vim.api.nvim_get_option_value('filetype', {})
 	local clients = vim.lsp.get_clients()
 
 	if next(clients) == nil then return msg end
@@ -210,11 +227,6 @@ require('lualine').setup{
 		lualine_z = {},
 	}
 }
-
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics,
-	{ update_in_insert = false }
-)
 
 -- start treesitter highlighting automatically when filetype is recognized
 vim.api.nvim_create_autocmd('FileType', {
