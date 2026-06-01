@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -20,9 +20,17 @@ require('lazy').setup({
 	'godlygeek/tabular',
 	'scrooloose/nerdtree',
 	'tpope/vim-abolish',
-	'williamboman/mason.nvim',
-	'williamboman/mason-lspconfig.nvim',
-	'neovim/nvim-lspconfig',
+
+	-- LSP package manager, automatic enabling of LSP clients
+	-- based on filetype
+	{
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig"
+		},
+	},
 
 	-- LuaLS autosetup
 	{
@@ -135,13 +143,6 @@ require('lazy').setup({
 	},
 
 	{
-		'nvim-treesitter/nvim-treesitter',
-		build = ":TSUpdate",
-		branch = "main",
-		lazy = false,
-	},
-
-	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = {
 			{ 'nvim-lua/plenary.nvim' },
@@ -154,7 +155,7 @@ require('lazy').setup({
 
 	{
 		'nvim-lualine/lualine.nvim',
-		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
 	},
 
 	{
@@ -166,8 +167,8 @@ require('lazy').setup({
 
 local function get_active_lsp()
 	local msg = 'No Active Lsp'
-	local buf_ft = vim.api.nvim_get_option_value('filetype', {})
-	local clients = vim.lsp.get_clients()
+	local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
 
 	if next(clients) == nil then return msg end
 
@@ -237,29 +238,6 @@ vim.api.nvim_create_autocmd('FileType', {
 		pcall(vim.treesitter.start)
 	end,
 })
-
--- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
-local lsp_defaults = {
-	flags = {
-		debounce_text_changes = 150
-	},
-	capabilities = require('cmp_nvim_lsp').default_capabilities(
-		vim.lsp.protocol.make_client_capabilities()
-	),
-	on_attach = function(client, buffer_number)
-		vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
-		client.server_capabilities.semanticTokensProvider = nil
-	end
-}
-
-require('lspconfig').util.default_config = vim.tbl_deep_extend(
-	'force',
-	require('lspconfig').util.default_config,
-	lsp_defaults
-)
-
-require('mason').setup()
-require('mason-lspconfig').setup()
 
 vim.lsp.config('asm_lsp', {
 	filetype = { 'asm', 'nasm' }
