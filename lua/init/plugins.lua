@@ -21,6 +21,20 @@ require('lazy').setup({
 	'scrooloose/nerdtree',
 	'tpope/vim-abolish',
 
+	-- For managing tree-sitter parsers
+	-- NOTE: Must have tree-sitter-cli installed on machine
+	{
+		"romus204/tree-sitter-manager.nvim",
+		dependencies = {}, -- tree-sitter-cli locally
+		config = function()
+			require("tree-sitter-manager").setup({
+				-- ensure_installed = {}, -- I'll just do this manually
+				-- languages = {}, -- For overriding or adding new parser sources
+				highlight = true, -- enable highlighting by default
+			})
+		end
+	},
+
 	-- LSP package manager, automatic enabling of LSP clients
 	-- based on filetype
 	{
@@ -229,15 +243,16 @@ require('lualine').setup{
 	}
 }
 
--- start treesitter highlighting automatically when filetype is recognized
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = { '*' },
-	callback = function()
-		-- FIXME find a better way to do this
-		-- maybe there's a way to check if we have a parser installed before trying to start it
-		pcall(vim.treesitter.start)
-	end,
-})
+-- NOTE: Not needed with tree-sitter-manager and "highlight = true"
+-- -- start treesitter highlighting automatically when filetype is recognized
+-- vim.api.nvim_create_autocmd('FileType', {
+-- 	pattern = { '*' },
+-- 	callback = function()
+-- 		-- FIXME find a better way to do this
+-- 		-- maybe there's a way to check if we have a parser installed before trying to start it
+-- 		pcall(vim.treesitter.start)
+-- 	end,
+-- })
 
 vim.lsp.config('asm_lsp', {
 	filetype = { 'asm', 'nasm' }
